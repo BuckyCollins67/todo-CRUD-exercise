@@ -10,21 +10,20 @@ const PORT = 8000;
 const mongoose = require("mongoose");
 const TodoTask = require("./models/TodoTask");
 const connectDB = require("./config/database");
+const homeRoutes = require("./routes/home")
+const editRoutes = require("./routes/edit")
 require('dotenv').config({path: './config/.env'})
+
+connectDB()
 
 //Set Middleware
 app.set("view engine", "ejs");
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 
-
-connectDB()
-// //Connect to Mongo
-// mongoose.connect(
-//     process.env.DB_CONNECTION, 
-//     { useNewUrlParser: true }, 
-//     () => {console.log("Connected to db!");}
-// )
+//Set Routes
+app.use('/', homeRoutes)
+app.use('/edit', editRoutes)
 
 // GET METHOD
 app.get("/", async (req, res) => {

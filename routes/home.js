@@ -7,6 +7,8 @@ const router = express.Router()
 const homeController = require('../controllers/home')
 
 //add specific routes for specific tasks
+router.get('/', homeController.getIndex)
+router.post('/', homeController.createTask)
 
 
 module.exports = router
